@@ -10,12 +10,313 @@
     }
   ],
   "paths": {
-    "/Answers": {
+    "/questions/{questionId}/answers/{answerId}/comments": {
+      "post": {
+        "tags": [
+          "AnswerComments"
+        ],
+        "operationId": "AnswerCommentsCreateComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateComment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateComment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateComment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadComment"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/answers/{answerId}/comments/{commentId}": {
+      "put": {
+        "tags": [
+          "AnswerComments"
+        ],
+        "operationId": "AnswerCommentsUpdateComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateComment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateComment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateComment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadComment"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnswerComments"
+        ],
+        "operationId": "AnswerCommentsDeleteComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/answers/{answerId}/comments/{commentId}/upvote": {
+      "put": {
+        "tags": [
+          "AnswerComments"
+        ],
+        "operationId": "AnswerCommentsCreateUpVoteComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUpVotes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnswerComments"
+        ],
+        "operationId": "AnswerCommentsDeleteUpVoteComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUpVotes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/answers": {
       "post": {
         "tags": [
           "Answers"
         ],
         "operationId": "AnswersCreate",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -52,7 +353,7 @@
         }
       }
     },
-    "/Answers/{id}": {
+    "/questions/{questionId}/answers/{answerId}": {
       "put": {
         "tags": [
           "Answers"
@@ -60,7 +361,16 @@
         "operationId": "AnswersPut",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
             "in": "path",
             "required": true,
             "schema": {
@@ -106,9 +416,7 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/Answers/{questionId}/{answerId}": {
+      },
       "delete": {
         "tags": [
           "Answers"
@@ -147,8 +455,8 @@
         }
       }
     },
-    "/Answers/Upvote/{questionId}/{answerId}": {
-      "post": {
+    "/questions/{questionId}/answers/{answerId}/upvote": {
+      "put": {
         "tags": [
           "Answers"
         ],
@@ -179,7 +487,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadAnswer"
+                  "$ref": "#/components/schemas/ReadUpVotes"
                 }
               }
             }
@@ -215,8 +523,15 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUpVotes"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -227,12 +542,23 @@
         }
       }
     },
-    "/QuestionComments": {
+    "/questions/{questionId}/comments": {
       "post": {
         "tags": [
           "QuestionComments"
         ],
         "operationId": "QuestionCommentsCreateComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -267,12 +593,34 @@
             "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/questions/{questionId}/comments/{commentId}": {
       "put": {
         "tags": [
           "QuestionComments"
         ],
         "operationId": "QuestionCommentsUpdateComment",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -310,9 +658,7 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/QuestionComments/{questionId}/{commentId}": {
+      },
       "delete": {
         "tags": [
           "QuestionComments"
@@ -351,7 +697,7 @@
         }
       }
     },
-    "/QuestionComments/Upvote/{questionId}/{commentId}": {
+    "/questions/{questionId}/comments/{commentId}/upvote": {
       "put": {
         "tags": [
           "QuestionComments"
@@ -383,7 +729,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadAnswer"
+                  "$ref": "#/components/schemas/ReadUpVotes"
                 }
               }
             }
@@ -422,8 +768,15 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUpVotes"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -434,7 +787,7 @@
         }
       }
     },
-    "/Questions/{id}": {
+    "/questions/{questionId}": {
       "get": {
         "tags": [
           "Questions"
@@ -442,7 +795,7 @@
         "operationId": "QuestionsGetById",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -474,7 +827,7 @@
         "operationId": "QuestionsUpdate",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -538,7 +891,7 @@
         "operationId": "QuestionsDelete",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -560,7 +913,7 @@
         }
       }
     },
-    "/Questions": {
+    "/questions": {
       "get": {
         "tags": [
           "Questions"
@@ -587,10 +940,17 @@
             }
           },
           {
-            "name": "unanswered",
+            "name": "filterType",
             "in": "query",
             "schema": {
-              "type": "boolean"
+              "$ref": "#/components/schemas/QuestionFilterType"
+            }
+          },
+          {
+            "name": "sortType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/QuestionSortType"
             }
           }
         ],
@@ -668,7 +1028,7 @@
         }
       }
     },
-    "/Questions/{questionId}/verifyAnswer/{answerId}": {
+    "/questions/{questionId}/verified-answer/{answerId}": {
       "put": {
         "tags": [
           "Questions"
@@ -700,7 +1060,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadQuestion"
+                  "$ref": "#/components/schemas/ReadVerifiedAnswer"
                 }
               }
             }
@@ -714,7 +1074,7 @@
         }
       }
     },
-    "/Questions/{questionId}/verifyAnswer": {
+    "/questions/{questionId}/verified-answer": {
       "delete": {
         "tags": [
           "Questions"
@@ -744,7 +1104,7 @@
         }
       }
     },
-    "/Questions/{id}/Upvote": {
+    "/questions/{questionId}/upvote": {
       "delete": {
         "tags": [
           "Questions"
@@ -752,35 +1112,7 @@
         "operationId": "QuestionsDeleteUpVote",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Questions"
-        ],
-        "operationId": "QuestionsCreateUpVote",
-        "parameters": [
-          {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -795,7 +1127,42 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadQuestion"
+                  "$ref": "#/components/schemas/ReadUpVotes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Questions"
+        ],
+        "operationId": "QuestionsCreateUpVote",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUpVotes"
                 }
               }
             }
@@ -809,7 +1176,7 @@
         }
       }
     },
-    "/Questions/{id}/Bookmark": {
+    "/questions/{questionId}/bookmark": {
       "put": {
         "tags": [
           "Questions"
@@ -817,7 +1184,7 @@
         "operationId": "QuestionsBookmarkQuestion",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -827,12 +1194,12 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadUser"
+                  "$ref": "#/components/schemas/ReadBookmarks"
                 }
               }
             }
@@ -849,7 +1216,7 @@
         "operationId": "QuestionsUnbookmarkQuestion",
         "parameters": [
           {
-            "name": "id",
+            "name": "questionId",
             "in": "path",
             "required": true,
             "schema": {
@@ -859,8 +1226,15 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadBookmarks"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found"
@@ -868,7 +1242,7 @@
         }
       }
     },
-    "/Questions/Bookmark": {
+    "/questions/bookmark": {
       "get": {
         "tags": [
           "Questions"
@@ -891,7 +1265,30 @@
         }
       }
     },
-    "/Tags": {
+    "/questions/me": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "operationId": "QuestionsGetMyQuestions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReadQuestion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags": {
       "get": {
         "tags": [
           "Tags"
@@ -923,7 +1320,7 @@
         }
       }
     },
-    "/Users": {
+    "/users": {
       "get": {
         "tags": [
           "Users"
@@ -965,7 +1362,7 @@
         }
       }
     },
-    "/Users/{id}": {
+    "/users/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -999,23 +1396,12 @@
         }
       }
     },
-    "/Users/nameIdentifier/{nameIdentifier}": {
+    "/users/loggeduserid": {
       "get": {
         "tags": [
           "Users"
         ],
-        "operationId": "UsersGetUserIdByNameIdentifier",
-        "parameters": [
-          {
-            "name": "nameIdentifier",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
+        "operationId": "UsersGetUserIdOfLoggedUser",
         "responses": {
           "200": {
             "description": "Success",
@@ -1033,7 +1419,7 @@
         }
       }
     },
-    "/Users/email/{email}": {
+    "/users/email/{email}": {
       "get": {
         "tags": [
           "Users"
@@ -1067,15 +1453,22 @@
         }
       }
     },
-    "/Users/me": {
-      "post": {
+    "/users/me": {
+      "put": {
         "tags": [
           "Users"
         ],
         "operationId": "UsersCreateOrUpdateLoggedUser",
         "responses": {
-          "204": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadUserBackendData"
+                }
+              }
+            }
           }
         }
       }
@@ -1083,14 +1476,89 @@
   },
   "components": {
     "schemas": {
-      "CreateAnswer": {
+      "CreateComment": {
         "type": "object",
         "properties": {
           "content": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadUpVotes": {
+        "type": "object",
+        "properties": {
+          "isUpVotedByLoggedUser": {
+            "type": "boolean"
           },
-          "questionId": {
+          "nbUpVotes": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadComment": {
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdById": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByLogin": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByFullname": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByPicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedById": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "upVotes": {
+            "$ref": "#/components/schemas/ReadUpVotes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateComment": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateAnswer": {
+        "type": "object",
+        "properties": {
+          "content": {
             "type": "string",
             "nullable": true
           }
@@ -1137,12 +1605,15 @@
             "format": "date-time",
             "nullable": true
           },
-          "isUpVoted": {
-            "type": "boolean"
+          "upVotes": {
+            "$ref": "#/components/schemas/ReadUpVotes"
           },
-          "nbUpVotes": {
-            "type": "integer",
-            "format": "int32"
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReadComment"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1151,96 +1622,6 @@
         "type": "object",
         "properties": {
           "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "questionId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateComment": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ReadComment": {
-        "type": "object",
-        "properties": {
-          "commentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdById": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdByLogin": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdByFullname": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdByPicture": {
-            "type": "string",
-            "nullable": true
-          },
-          "updatedById": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isUpVoted": {
-            "type": "boolean"
-          },
-          "nbUpVotes": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateComment": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "commentId": {
             "type": "string",
             "nullable": true
           }
@@ -1253,6 +1634,19 @@
           "tagName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadBookmarks": {
+        "type": "object",
+        "properties": {
+          "isBookmarkedByLoggedUser": {
+            "type": "boolean"
+          },
+          "nbBookmarks": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1322,19 +1716,11 @@
             },
             "nullable": true
           },
-          "bookmarkedByUserIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
+          "upVotes": {
+            "$ref": "#/components/schemas/ReadUpVotes"
           },
-          "isUpVoted": {
-            "type": "boolean"
-          },
-          "nbUpVotes": {
-            "type": "integer",
-            "format": "int32"
+          "bookmarks": {
+            "$ref": "#/components/schemas/ReadBookmarks"
           }
         },
         "additionalProperties": false
@@ -1360,6 +1746,23 @@
         },
         "additionalProperties": false
       },
+      "QuestionFilterType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "QuestionSortType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "CreateQuestion": {
         "type": "object",
         "properties": {
@@ -1376,6 +1779,20 @@
             "items": {
               "$ref": "#/components/schemas/ReadTag"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadVerifiedAnswer": {
+        "type": "object",
+        "properties": {
+          "answerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionId": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1407,12 +1824,15 @@
           "picture": {
             "type": "string",
             "nullable": true
-          },
-          "bookmarkedQuestions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadUserBackendData": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
             "nullable": true
           }
         },
