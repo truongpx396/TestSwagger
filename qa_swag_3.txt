@@ -347,6 +347,16 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadQuestion"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not Found"
           }
@@ -538,6 +548,113 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/answers/{answerId}/bookmark": {
+      "put": {
+        "tags": [
+          "Answers"
+        ],
+        "operationId": "AnswersBookmarkAnswer",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadBookmarks"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Answers"
+        ],
+        "operationId": "AnswersUnbookmarkAnswer",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadBookmarks"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/questions/answers/bookmarks": {
+      "get": {
+        "tags": [
+          "Answers"
+        ],
+        "operationId": "AnswersGetBookMarkedAnswers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReadQuestion"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1242,7 +1359,7 @@
         }
       }
     },
-    "/questions/bookmark": {
+    "/questions/bookmarks": {
       "get": {
         "tags": [
           "Questions"
@@ -1271,6 +1388,40 @@
           "Questions"
         ],
         "operationId": "QuestionsGetMyQuestions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReadQuestion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/questions/user/{userId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "operationId": "QuestionsGetUserQuestions",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1565,6 +1716,19 @@
         },
         "additionalProperties": false
       },
+      "ReadBookmarks": {
+        "type": "object",
+        "properties": {
+          "isBookmarkedByLoggedUser": {
+            "type": "boolean"
+          },
+          "nbBookmarks": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "ReadAnswer": {
         "type": "object",
         "properties": {
@@ -1592,6 +1756,10 @@
             "type": "string",
             "nullable": true
           },
+          "createdByPicture": {
+            "type": "string",
+            "nullable": true
+          },
           "updatedById": {
             "type": "string",
             "nullable": true
@@ -1614,16 +1782,9 @@
               "$ref": "#/components/schemas/ReadComment"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateAnswer": {
-        "type": "object",
-        "properties": {
-          "content": {
-            "type": "string",
-            "nullable": true
+          },
+          "bookmarks": {
+            "$ref": "#/components/schemas/ReadBookmarks"
           }
         },
         "additionalProperties": false
@@ -1634,19 +1795,6 @@
           "tagName": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ReadBookmarks": {
-        "type": "object",
-        "properties": {
-          "isBookmarkedByLoggedUser": {
-            "type": "boolean"
-          },
-          "nbBookmarks": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1675,6 +1823,10 @@
             "nullable": true
           },
           "createdByFullname": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdByPicture": {
             "type": "string",
             "nullable": true
           },
@@ -1725,6 +1877,16 @@
         },
         "additionalProperties": false
       },
+      "UpdateAnswer": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateQuestion": {
         "type": "object",
         "properties": {
@@ -1749,7 +1911,8 @@
       "QuestionFilterType": {
         "enum": [
           0,
-          1
+          1,
+          2
         ],
         "type": "integer",
         "format": "int32"
